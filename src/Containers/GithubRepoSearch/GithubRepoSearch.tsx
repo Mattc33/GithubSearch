@@ -1,11 +1,11 @@
 import * as React from 'react'
+import styles from './GithubRepoSearch.module.scss'
 
-import Auxx from '../../Components/Auxx/Auxx'
-import Header from '../../Components/Header/Header'
+import Form from '../../Components/Form/Form'
 
 const GithubRepoSearch = () => 
-    <Auxx>
-        <Header />
-    </Auxx>
+    <div className={styles.githubAppContainer}>
+        <Form />
+    </div>
 
 export default GithubRepoSearch
