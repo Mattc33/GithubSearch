@@ -8,7 +8,8 @@
 
 ## Third Party Dependencies
 
-- https://github.com/bietkul/react-reactive-form
+- https://www.npmjs.com/package/react-reactive-form
+- https://www.npmjs.com/package/axios
 - 
 
 ---
