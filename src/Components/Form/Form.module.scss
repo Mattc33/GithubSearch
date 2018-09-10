@@ -17,9 +17,6 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
-        grid-template-areas: 
-            "inputText license"
-            "stars forked";
         grid-row-gap: 10px;
         grid-column-gap: 120px;
         justify-items: center;
@@ -43,47 +40,26 @@
 
             label {
                 padding-bottom: 5px;
-                font-size: .5rem;
-            }
-    
-            .textInput {
-                grid-area: inputText;
+                font-size: .6rem;
             }
     
             .licenseInput {
-                grid-area: license;
                 background-color: #ffffff;
-            }
-    
-            .starsInput {
-                grid-area: stars;
-            }
-    
-            .forkedCheckbox {
-                grid-area: forked;
-                justify-self: start;
-                display: block;
-                position: relative;
-                cursor: pointer;
-                user-select: none;
-    
-                input {
-                    position: absolute;
-                    opacity: 0;
+
+                &:hover {
                     cursor: pointer;
                 }
+            }
     
-                .checkmark {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    height: 25px;
-                    width: 25px;
-                    background-color: #eee;
-                }
-            }   
         }
+
+        .forkedCheckbox {
+            justify-self: start;
+            align-self: end;
+            margin-bottom: 5px;
+        }  
     }
+
 
     .searchContainer {
         display: flex;
@@ -95,11 +71,18 @@
             color: #ffffff;
             height: 40px;
             padding: 0 30px 0 30px;
-            font-size: .4rem;
+            font-size: .6rem;
             border-radius: 5px;
+            user-select: none;
+            border: none;
 
             &:hover {
                 cursor: pointer;
+            }
+
+            &:disabled {
+                cursor: not-allowed;
+                background: #ccc;
             }
         }
     }

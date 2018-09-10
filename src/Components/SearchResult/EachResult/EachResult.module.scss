@@ -1,0 +1,76 @@
+.eachResultContainer {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #95989A;
+    display: flex;
+    margin-bottom: 20px;
+
+    .textSection {
+        width: 80%;
+        border-right: 1px solid #95989A;
+        padding: 20px;
+        display: flex;
+        
+        .titleDescription {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+
+            h4 {
+                margin: 0;
+                margin-bottom: 20px;
+            }
+
+            p {
+                margin: 0;
+                font-size: .9rem;
+                color: #4B5050;
+            }
+        }
+
+        .isForked {
+            width: 20%;
+            display: flex;
+            flex-direction: row-reverse;
+            
+            span {
+                height: 20px;
+                padding: 5px 20px 5px 20px;
+                color: #ffffff;
+                background: #2B7BC0;
+                line-height: 20px;
+            }
+        }
+    }
+
+    .infoBox {
+        width: 140px;
+        text-align: center;
+        padding: 0 5px 0 5px;
+        display: flex;
+
+        div {
+            margin: 0 auto;
+            align-self: center;
+            display: flex;
+            flex-direction: column;
+            color: #4B5050;
+            font-size: .9rem;
+
+            span:first-child {
+                font-weight: 400;
+                padding-bottom: 15px;
+            }
+
+            span:last-child {
+                font-weight: 700;
+            }
+        }
+    }
+
+    .starsSection {
+        border-right: 1px solid #95989A;
+    }
+
+}
