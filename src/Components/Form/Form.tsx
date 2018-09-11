@@ -8,7 +8,8 @@ import IsForkedCheckbox from './IsForkedCheckbox/IsForkedCheckbox'
 class Form extends React.Component {
 
     public state = {
-        disabledSearchBtn: true
+        disabledSearchBtn: true,
+        ifStarError: false
     }
 
     private formData = {
@@ -56,7 +57,12 @@ class Form extends React.Component {
     
     public getStars = (e: any) => 
         this.formData.stars = '+stars:' + e.target.value
-    
+
+    public isStarsInputInvalid = (e: any) => {
+        const matchGithubStars = e.target.value.match(/([0-9]|..[0-9])/g)
+        matchGithubStars ? this.setState({isStarError: false}) : this.setState({isStarError: true})
+    }
+        
     public isForked = (e: any) => 
         e.target.checked ? this.formData.isForked = '+fork:' + 'true' : this.formData.isForked = ''
     
@@ -85,6 +91,7 @@ class Form extends React.Component {
                             type="select" 
                             className={`${styles.starsInput} ${styles.formUI}`}
                             onChange={this.getStars}
+                            onBlur={this.isStarsInputInvalid}
                         />
                     </div>
 
