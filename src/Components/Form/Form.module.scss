@@ -41,10 +41,22 @@
                 padding-bottom: 5px;
                 font-size: .6rem;
             }
+
+            .starsInputError {
+                font-size: .7rem;
+                color: red;
+            }
+
+            .noError {
+                display: none;
+            }
     
             .licenseInput {
                 background-color: #ffffff;
                 -webkit-appearance: none;
+                padding-right: 50px;
+
+                // render caret
                 background-image:
                     linear-gradient(45deg, transparent 50%, #808080 50%),
                     linear-gradient(135deg, #808080 50%, transparent 50%),
@@ -61,23 +73,6 @@
                 
                 &:hover {
                     cursor: pointer;
-                }
-
-                &:focus {
-                    background-image:
-                        linear-gradient(45deg, #808080 50%, transparent 50%),
-                        linear-gradient(135deg, transparent 50%, #808080 50%),
-                        linear-gradient(to right, #ccc, #ccc);
-                    background-position:
-                        calc(100% - 15px) 1em,
-                        calc(100% - 20px) 1em,
-                        calc(100% - 2.5em) 0.5em;
-                    background-size:
-                        5px 5px,
-                        5px 5px,
-                        1px 1.5em;
-                    background-repeat: no-repeat;
-                    outline: 0;
                 }
             }
     
