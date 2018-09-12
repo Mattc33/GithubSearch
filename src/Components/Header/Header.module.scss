@@ -8,12 +8,17 @@
         display: flex;
         height: inherit;
 
-
         .logo {
             align-self: center;
             line-height: 60px;
             width: 60px;
             height: 20px;
         }
+    }
+}
+
+@media only screen and (max-width: 990px) {
+    .header .logoContainer {
+        padding: 0 5% 0 5%;
     }
 }

@@ -1,0 +1,12 @@
+.resultContainer {
+    display: flex;
+    flex-direction: column;
+
+    .searchText {
+        text-align: center;
+        color: #787B7B;
+        font-size: .9rem;
+        margin-bottom: 40px;
+    }
+}
+

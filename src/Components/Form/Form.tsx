@@ -1,21 +1,21 @@
 import * as React from 'react'
 import styles from './Form.module.scss'
+import { connect } from 'react-redux'
 
 import GithubSearchApi from '../../APIs/github-search.api'
 import LicenseSelect from './LicenseSelect/LicenseSelect'
 import IsForkedCheckbox from './IsForkedCheckbox/IsForkedCheckbox'
-class Form extends React.Component {
+
+interface IFormState { text: string, license: string, stars: string, isForked: string, 
+                       onTextChange: any, onLicenseChange: any, onStarsChange: any, 
+                       onIsForkedChange: any, onSearchClick: any, onQuerySuccess: any,
+                       onLoadingSpinner: any
+                    }
+class Form extends React.Component<IFormState> {
 
     public state = {
         disabledSearchBtn: true,
         isStarError: false
-    }
-
-    private formData = {
-        text: '',
-        license: '',
-        stars: '',
-        isForked: ''
     }
 
     public render() {
@@ -52,15 +52,15 @@ class Form extends React.Component {
                         <label htmlFor="licenseInput">License</label>
                         <LicenseSelect 
                             className={`${styles.licenseInput} ${styles.formUI}`}
-                            onChange={this.licenseChange}
+                            onChange={this.props.onLicenseChange}
                         />
                     </div>
 
-                    <IsForkedCheckbox onClick={this.isForked}/>
+                    <IsForkedCheckbox onClick={this.props.onIsForkedChange}/>
 
                 </div>
                 <div className={styles.searchContainer}>
-                    <button className={styles.search} onClick={this.fetchRequest} disabled={this.state.disabledSearchBtn}>SEARCH</button>
+                    <button className={styles.search} onClick={this.submitForm} disabled={this.state.disabledSearchBtn}>SEARCH</button>
                 </div>
             </div>
         )
@@ -69,28 +69,42 @@ class Form extends React.Component {
     // ====================================================================================================================
     // * Form API
     // ====================================================================================================================
-    private fetchRequest = () => {
-        new GithubSearchApi().getGithubSearchResults(this.formData.text, this.formData.license, this.formData.stars, this.formData.isForked)
-            .then( res => {
-                console.log(res.data)
-                const resultData = res.data.items.map( (eaResult: any) => {
-                    let license: string = ''
-                    if (eaResult.license !== null) {
-                        license = eaResult.license.name
-                    }
-                    return {
-                            repoName: eaResult.full_name,
-                            repoOwnerName: eaResult.owner.login,
-                            urlToRepo: eaResult.html_url,
-                            description: eaResult.description,
-                            numberOfStars: eaResult.stargazers_count,
-                            license: `${license}`,
-                            isForked: eaResult.fork
-                    }
-                })
+    private submitForm = (): void => {
+        if (this.props.text.length > 0) {
+            this.props.onSearchClick(true)
+            this.fetchResults()
+        } else {
+            this.props.onSearchClick(false)
+        }
+    }
 
-                console.log(resultData)
-                // redux store the results for SearchResult Component to use
+    private fetchResults = () => {
+        this.props.onQuerySuccess([])
+        this.props.onLoadingSpinner(true)
+        new GithubSearchApi().getGithubSearchResults(this.props.text, this.props.license, this.props.stars, this.props.isForked)
+            .then( res => {
+                if(res.status === 200) {
+                    const resultData = res.data.items.map( (eaResult: any) => {
+                        let license: string = ''
+                        if (eaResult.license !== null) {
+                            license = eaResult.license.name
+                        }
+                        return {
+                                repoName: eaResult.full_name,
+                                repoOwnerName: eaResult.owner.login,
+                                urlToRepo: eaResult.html_url,
+                                description: eaResult.description,
+                                numberOfStars: eaResult.stargazers_count,
+                                license: `${license}`,
+                                isForked: eaResult.fork
+                        }
+                    })
+                    return resultData
+                }
+            })
+            .then( queryResults => {
+                this.props.onLoadingSpinner(false)
+                this.props.onQuerySuccess(queryResults)
             })
     }
 
@@ -98,41 +112,59 @@ class Form extends React.Component {
     // * Form UI Events
     // ====================================================================================================================
     private getText = (e: any) => {
-        this.formData.text = e.target.value
-        this.toggleSearchBtn()
+        this.props.onTextChange(e.target.value)
+        this.toggleSearchBtn(e.target.value.length)
     }
 
-    private licenseChange = (e: any) => 
-        this.formData.license = '+license:' + e.target.value 
+    private getStars = (e: any) => 
+        this.isStarsInputInvalid(e.target.value)
     
-    private getStars = (e: any): void => 
-        this.updateStarsSearchParams(e.target.value)
-
-    private updateStarsSearchParams = (starsText: string) => {
-        this.formData.stars = '+stars:' + starsText
-    }
-
     private onStarsBlur = (e: any) => 
         this.isStarsInputInvalid(e.target.value)
     
-    private isStarsInputInvalid = (starsText: string) => {
-        const matchGithubStars = starsText.match(/([0-9]|..[0-9])/g)
-        if(matchGithubStars || starsText === '') { 
+    private isStarsInputInvalid = (starsInput: string): void => {
+        const matchGithubStars = starsInput.match(/([0-9]|..[0-9])/g)
+        if(matchGithubStars !== null || starsInput === '') { 
             this.setState({isStarError: false, disabledSearchBtn: false})
-            if (starsText === '') {
-                this.formData.stars = ''
-            }
+            this.props.onStarsChange(starsInput)
         } else {
             this.setState({isStarError: true, disabledSearchBtn: true})
+            this.props.onStarsChange('')
         }
     }
-
-    private isForked = (e: any) => 
-        e.target.checked ? this.formData.isForked = '+fork:' + 'true' : this.formData.isForked = ''
     
-    private toggleSearchBtn = () => 
-        this.formData.text.length > 0 ? this.setState({disabledSearchBtn: false}) : this.setState({disabledSearchBtn: true})
+    private toggleSearchBtn = (textLen: number) => 
+        textLen > 0 ? this.setState({disabledSearchBtn: false}) : this.setState({disabledSearchBtn: true})
 
 }
 
-export default Form
+const mapStateToProps = (state: any) => {
+    return {
+        text: state.form.text,
+        license: state.form.license,
+        stars: state.form.stars,
+        isForked: state.form.isForked
+    }
+}
+
+const mapDispachToProps = (dispatch: any) => {
+    return {
+        onSearchClick: (active: boolean) => dispatch({type: 'ACTIVATE_SUBMIT', val: active}),
+        onTextChange: (textVal: string) => dispatch({type: 'NEW_TEXT_QUERY', val: textVal}),
+        onLicenseChange: (e: any) => dispatch({type: 'NEW_LICENSE_QUERY', val: '+license:' + e.target.value}),
+        onStarsChange: (starsInput: string) => {
+            return (starsInput === '')
+                ? dispatch({type: 'NEW_STAR_QUERY', val: ''}) 
+                : dispatch({type: 'NEW_STAR_QUERY', val: '+stars:' + starsInput})
+        },
+        onIsForkedChange: (e: any) => {
+            return (e.target.checked) 
+                ? dispatch({type: 'ISFORKED_QUERY', val: '+fork:' + 'true'})
+                : dispatch({type: 'ISFORKED_QUERY', val: ''})
+        },
+        onQuerySuccess: (queryResults: []) => dispatch({type: 'QUERY_RESULTS', val: queryResults}),
+        onLoadingSpinner: (isLoading: boolean) => dispatch({type: 'ISLOADING', val: isLoading})
+    }   
+}
+
+export default connect(mapStateToProps, mapDispachToProps)(Form)
