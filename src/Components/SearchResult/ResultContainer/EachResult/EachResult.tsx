@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styles from './EachResult.module.css'
+import styles from './EachResult.module.scss'
 
 const EachResult = (props: any) => 
     <div className={styles.eachResultContainer}>

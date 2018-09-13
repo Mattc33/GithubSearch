@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styles from './GithubRepoSearch.module.css'
+import styles from './GithubRepoSearch.module.scss'
 
 import Form from '../../Components/Form/Form'
 import SearchResult from '../../Components/SearchResult/SearchResult'

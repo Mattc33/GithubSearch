@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styles from './App.module.css'
+import styles from './App.module.scss'
 
 import GithubRepoSearch from './GithubRepoSearch/GithubRepoSearch'
 import Header from './../Components/Header/Header'
