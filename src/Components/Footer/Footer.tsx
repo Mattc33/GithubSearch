@@ -4,7 +4,7 @@ import styles from './Footer.module.scss'
 const Footer = () => 
     <footer className={styles.footer}>
         <div className={styles.footerText}>
-            © 2017 Even Financial, INC. - CONFIDENTIAL
+            © Matthew Chan - Github Search Mini Project
         </div>
     </footer>
 

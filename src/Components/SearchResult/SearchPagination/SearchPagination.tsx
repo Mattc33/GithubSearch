@@ -6,7 +6,7 @@ const SearchPagination = (props: any) =>
     <Pagination
         defaultCurrent={1}
         current={props.currentPage}
-        total={props.numberOfResults / 30}
+        total={props.numberOfResults}
         onChange={props.onPageChange}
     />
 

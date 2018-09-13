@@ -88,7 +88,11 @@ const mapDispachToProps = (dispatch: any) => {
         onSearchClick: (active: boolean) => dispatch({type: 'ACTIVATE_SUBMIT', val: active}),
         onQuerySuccess: (queryResults: []) => dispatch({type: 'QUERY_RESULTS', val: queryResults}),
         onLoadingSpinner: (isLoading: boolean) => dispatch({type: 'ISLOADING', val: isLoading}),
-        onNumberOfResults: (results: number) => dispatch({type: 'NEW_RESULTS_AMOUNT', val: results})
+        onNumberOfResults: (results: number) => {
+            return (results > 1000)
+                ? dispatch({type: 'NEW_RESULTS_AMOUNT', val: 1000})
+                : dispatch({type: 'NEW_RESULTS_AMOUNT', val: results})
+        }
     }
 }
 

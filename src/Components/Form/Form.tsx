@@ -23,7 +23,7 @@ class Form extends React.Component<IFormState> {
     public render() {
         return (
             <div className={styles.formContainer}>
-                <h1 className={styles.searchTitle}>Even Financial Github Repository Search</h1>
+                <h1 className={styles.searchTitle}>Github Repository Search</h1>
                 <div className={styles.inputContainer}>
 
                     <div className={`${styles.formUIContainer}`}>
@@ -154,7 +154,11 @@ const mapDispachToProps = (dispatch: any) => {
         },
         onQuerySuccess: (queryResults: []) => dispatch({type: 'QUERY_RESULTS', val: queryResults}),
         onLoadingSpinner: (isLoading: boolean) => dispatch({type: 'ISLOADING', val: isLoading}),
-        onNumberOfResults: (results: number) => dispatch({type: 'NEW_RESULTS_AMOUNT', val: results})
+        onNumberOfResults: (results: number) => {
+            return (results > 1000)
+                ? dispatch({type: 'NEW_RESULTS_AMOUNT', val: 1000})
+                : dispatch({type: 'NEW_RESULTS_AMOUNT', val: results})
+        }
     }
 }
 
