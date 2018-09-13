@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styles from './Form.module.scss'
+import styles from './Form.module.css'
 import { connect } from 'react-redux'
 
 import GithubSearchApi from '../../APIs/github-search.api'

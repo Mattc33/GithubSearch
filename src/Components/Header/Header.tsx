@@ -1,4 +1,4 @@
-import styles from './Header.module.scss'
+import styles from './Header.module.css'
 import logo from '../../Assets/logo.png'
 import * as React from 'react'
 

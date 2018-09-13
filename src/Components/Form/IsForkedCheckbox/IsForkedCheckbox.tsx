@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styles from './IsForkedCheckbox.module.scss'
+import styles from './IsForkedCheckbox.module.css'
 
 const IsForkedCheckbox = (props: any) => 
     <div className={styles.checkbox}>

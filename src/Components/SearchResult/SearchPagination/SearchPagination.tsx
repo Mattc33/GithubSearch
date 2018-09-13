@@ -1,5 +1,4 @@
 import * as React from 'react'
-// import styles from './SearchPagination.module.scss'
 
 import { Pagination } from 'antd'
 

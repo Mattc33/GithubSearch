@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styles from './ResultContainer.module.scss'
+import styles from './ResultContainer.module.css'
 import { connect } from 'react-redux'
 
 import EachResult from './EachResult/EachResult'

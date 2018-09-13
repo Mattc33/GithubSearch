@@ -1,0 +1,138 @@
+.eachResultContainer {
+  width: 100%;
+  height: auto;
+  border: 1px solid #95989A;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.eachResultContainer .textSection {
+  width: 80%;
+  justify-self: flex-start;
+  border-right: 1px solid #95989A;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.eachResultContainer .textSection .titleDescription {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.eachResultContainer .textSection .titleDescription h4 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.eachResultContainer .textSection .titleDescription h4 a {
+  color: #4D83BF;
+  text-decoration: none;
+}
+
+.eachResultContainer .textSection .titleDescription p {
+  margin: 0;
+  font-size: .9rem;
+  color: #4B5050;
+}
+
+.eachResultContainer .textSection .isForked {
+  width: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.eachResultContainer .textSection .isForked span {
+  height: 20px;
+  padding: 5px 20px 5px 20px;
+  color: #ffffff;
+  background: #2B7BC0;
+}
+
+.eachResultContainer .infoBox {
+  width: 160px;
+  text-align: center;
+  padding: 0 5px 0 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.eachResultContainer .infoBox div {
+  margin: 0 auto;
+  -ms-flex-item-align: center;
+      align-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #4B5050;
+  font-size: .9rem;
+}
+
+.eachResultContainer .infoBox div span:first-child {
+  font-weight: 400;
+  padding-bottom: 15px;
+}
+
+.eachResultContainer .infoBox div span:last-child {
+  font-weight: 700;
+}
+
+.eachResultContainer .starsSection {
+  border-right: 1px solid #95989A;
+}
+
+@media only screen and (max-width: 990px) {
+  .eachResultContainer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .eachResultContainer .textSection {
+    width: inherit;
+    border-right: none;
+    border-bottom: 1px solid #95989A;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .eachResultContainer .infoBox {
+    min-width: inherit;
+    border-bottom: 1px solid #95989A;
+    text-align: left;
+    padding-left: 20px;
+  }
+  .eachResultContainer .infoBox div {
+    margin: 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    display: inline-block;
+    padding: 20px 0 20px 0;
+  }
+  .eachResultContainer .starsSection {
+    border-right: none;
+  }
+}
