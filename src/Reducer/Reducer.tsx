@@ -46,7 +46,6 @@ const reducer = (state = initialState, action: any) => {
         case 'NEW_RESULTS_AMOUNT':
             newState.numberOfResults = action.val
     }
-    console.log(newState)
     return newState
 }
 

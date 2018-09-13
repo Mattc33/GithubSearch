@@ -114,7 +114,6 @@ class Form extends React.Component<IFormState> {
         const matchOnlyNum = starsInput.match(/^[0-9]*$/g)
         const matchOperator = starsInput.match(/(<|>|<=|>=)([0-9]*)\w+/)
         const matchRange = starsInput.match(/(\w*[0-9][0-9]\.\.\w*[0-9])/)
-        console.log(matchOnlyNum)
         if((matchOnlyNum !== null || matchOperator !== null || matchRange !== null) || starsInput === '') { 
             this.setState({isStarError: false, disabledSearchBtn: false})
             this.props.onStarsChange(starsInput)
