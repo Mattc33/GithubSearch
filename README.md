@@ -7,11 +7,10 @@
 3. Run test - `yarn test`
 
 ## Third Party Dependencies
-
-- https://www.npmjs.com/package/react-reactive-form
 - https://www.npmjs.com/package/axios
-- 
-
+- https://www.npmjs.com/package/antd - { Pagination }
+- https://www.npmjs.com/package/react-redux
+- https://www.npmjs.com/package/redux
 ---
 
 # Github Repository Search

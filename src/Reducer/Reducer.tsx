@@ -2,6 +2,7 @@ const initialState = {
     activateSearchResults: false,
     queryResults: [],
     isLoading: false,
+    numberOfResults: 0,
     form: {
         text: '',
         license: '',
@@ -41,6 +42,9 @@ const reducer = (state = initialState, action: any) => {
         case 'ISLOADING':
             newState.isLoading = action.val
             break
+
+        case 'NEW_RESULTS_AMOUNT':
+            newState.numberOfResults = action.val
     }
     console.log(newState)
     return newState

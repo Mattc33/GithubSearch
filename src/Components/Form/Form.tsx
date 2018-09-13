@@ -3,14 +3,16 @@ import styles from './Form.module.scss'
 import { connect } from 'react-redux'
 
 import GithubSearchApi from '../../APIs/github-search.api'
+import ParseResultData from '../../Utils/ParseResultData.Utils'
 import LicenseSelect from './LicenseSelect/LicenseSelect'
 import IsForkedCheckbox from './IsForkedCheckbox/IsForkedCheckbox'
 
 interface IFormState { text: string, license: string, stars: string, isForked: string, 
                        onTextChange: any, onLicenseChange: any, onStarsChange: any, 
                        onIsForkedChange: any, onSearchClick: any, onQuerySuccess: any,
-                       onLoadingSpinner: any
+                       onLoadingSpinner: any, onNumberOfResults: any
                     }
+
 class Form extends React.Component<IFormState> {
 
     public state = {
@@ -84,22 +86,8 @@ class Form extends React.Component<IFormState> {
         new GithubSearchApi().getGithubSearchResults(this.props.text, this.props.license, this.props.stars, this.props.isForked)
             .then( res => {
                 if(res.status === 200) {
-                    const resultData = res.data.items.map( (eaResult: any) => {
-                        let license: string = ''
-                        if (eaResult.license !== null) {
-                            license = eaResult.license.name
-                        }
-                        return {
-                                repoName: eaResult.full_name,
-                                repoOwnerName: eaResult.owner.login,
-                                urlToRepo: eaResult.html_url,
-                                description: eaResult.description,
-                                numberOfStars: eaResult.stargazers_count,
-                                license: `${license}`,
-                                isForked: eaResult.fork
-                        }
-                    })
-                    return resultData
+                    this.props.onNumberOfResults(res.data.total_count)
+                    return ParseResultData(res.data.items)
                 }
             })
             .then( queryResults => {
@@ -123,8 +111,11 @@ class Form extends React.Component<IFormState> {
         this.isStarsInputInvalid(e.target.value)
     
     private isStarsInputInvalid = (starsInput: string): void => {
-        const matchGithubStars = starsInput.match(/([0-9]|..[0-9])/g)
-        if(matchGithubStars !== null || starsInput === '') { 
+        const matchOnlyNum = starsInput.match(/^[0-9]*$/g)
+        const matchOperator = starsInput.match(/(<|>|<=|>=)([0-9]*)\w+/)
+        const matchRange = starsInput.match(/(\w*[0-9][0-9]\.\.\w*[0-9])/)
+        console.log(matchOnlyNum)
+        if((matchOnlyNum !== null || matchOperator !== null || matchRange !== null) || starsInput === '') { 
             this.setState({isStarError: false, disabledSearchBtn: false})
             this.props.onStarsChange(starsInput)
         } else {
@@ -163,8 +154,9 @@ const mapDispachToProps = (dispatch: any) => {
                 : dispatch({type: 'ISFORKED_QUERY', val: ''})
         },
         onQuerySuccess: (queryResults: []) => dispatch({type: 'QUERY_RESULTS', val: queryResults}),
-        onLoadingSpinner: (isLoading: boolean) => dispatch({type: 'ISLOADING', val: isLoading})
-    }   
+        onLoadingSpinner: (isLoading: boolean) => dispatch({type: 'ISLOADING', val: isLoading}),
+        onNumberOfResults: (results: number) => dispatch({type: 'NEW_RESULTS_AMOUNT', val: results})
+    }
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(Form)

@@ -3,9 +3,7 @@ import styles from './ResultContainer.module.scss'
 import { connect } from 'react-redux'
 
 import EachResult from './EachResult/EachResult'
-
-interface ISearchResultState { active: boolean, text: string, license: string, queryResults: any, 
-    stars: string, isForked: string, onTextChange: any, isLoading: boolean }
+interface ISearchResultState { queryResults: any, }
 
 class ResultContainer extends React.Component<ISearchResultState> {
 
@@ -35,13 +33,7 @@ class ResultContainer extends React.Component<ISearchResultState> {
 
 const mapStateToProps = (state: any) => {
     return {
-        active: state.activateSearchResults,
-        text: state.form.text,
-        license: state.form.license,
-        stars: state.form.stars,
-        isForked: state.form.isForked,
-        queryResults: state.queryResults,
-        isLoading: state.isLoading
+        queryResults: state.queryResults
     }
 }
 
