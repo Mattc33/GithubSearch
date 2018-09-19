@@ -1,5 +1,3 @@
-# Submission: Matthew Chan
-
 ## To run 
 
 1. install dependencies - `yarn install`
