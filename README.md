@@ -12,5 +12,8 @@ https://githubsearch.netlify.com/
 - https://www.npmjs.com/package/antd - { Pagination }
 - https://www.npmjs.com/package/react-redux
 - https://www.npmjs.com/package/redux
----
+
+## Tech
+- React with TypeScript and Css Modules
+- Redux Pattern
 
