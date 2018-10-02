@@ -3,7 +3,7 @@ import styles from './ResultContainer.module.scss'
 import { connect } from 'react-redux'
 
 import EachResult from './EachResult/EachResult'
-interface ISearchResultState { queryResults: any, }
+interface ISearchResultState { queryResults: [], }
 
 class ResultContainer extends React.Component<ISearchResultState> {
 

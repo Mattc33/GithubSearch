@@ -7,10 +7,18 @@ import ParseResultData from '../../Utils/ParseResultData.Utils'
 import LicenseSelect from './LicenseSelect/LicenseSelect'
 import IsForkedCheckbox from './IsForkedCheckbox/IsForkedCheckbox'
 
-interface IFormState { text: string, license: string, stars: string, isForked: string, 
-                       onTextChange: any, onLicenseChange: any, onStarsChange: any, 
-                       onIsForkedChange: any, onSearchClick: any, onQuerySuccess: any,
-                       onLoadingSpinner: any, onNumberOfResults: any
+interface IFormState {  text: string, 
+                        license: string, 
+                        stars: string, 
+                        isForked: string, 
+                        onTextChange: (textVal: string) => void, 
+                        onLicenseChange: (e: any) => void, 
+                        onStarsChange: (starsInput: string) => void, 
+                        onIsForkedChange: (e: any) => void, 
+                        onSearchClick: (active: boolean) => void, 
+                        onQuerySuccess: (queryResults: []) => void,
+                        onLoadingSpinner: (isLoading: boolean) => void, 
+                        onNumberOfResults: (results: number) => void
                     }
 
 class Form extends React.Component<IFormState> {

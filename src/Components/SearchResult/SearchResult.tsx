@@ -9,10 +9,18 @@ import SearchText from './SearchText/SearchText'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import SearchPagination from '../SearchResult/SearchPagination/SearchPagination'
 
-interface ISearchResultState { active: boolean, text: string, license: string, queryResults: any, 
-                               stars: string, isForked: string, isLoading: boolean, numberOfResults: number, 
-                               onSearchClick: any, onQuerySuccess: any, onLoadingSpinner: any,
-                               onNumberOfResults: any
+interface ISearchResultState {  active: boolean, 
+                                text: string, 
+                                license: string, 
+                                stars: string, 
+                                queryResults: [], 
+                                isForked: string, 
+                                isLoading: boolean, 
+                                numberOfResults: number, 
+                                onSearchClick: (active: boolean) => void, 
+                                onQuerySuccess: (queryResults: []) => void, 
+                                onLoadingSpinner: (isLoading: boolean) => void,
+                                onNumberOfResults: (results: number) => void
                             }
 class SearchResult extends React.Component<ISearchResultState> {
 
